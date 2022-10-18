@@ -2,13 +2,15 @@ const PORT = 8000
 const cors=require('cors')
 const express =require('express')
 const  {initializeApp} =require('firebase/app')
-const{getFirestore,collection,getDocs,addDoc}=require('firebase/firestore')
+const{getFirestore,collection,getDocs}=require('firebase/firestore')
 
 
 require ('dotenv').config()
 
 
 const app = express()
+
+app.use(cors());
 
 app.listen(PORT,()=>console.log("Running on port ",PORT))
 
@@ -37,7 +39,7 @@ const firebaseApp=initializeApp(firebaseConfig);
 const db =getFirestore(firebaseApp)
 
 
- async function getflights(db) {
+ async function getflights(db){
      // saveFlights(db);
      const flightCollection = collection(db, 'flights');
      const flightSnapshot = await getDocs(flightCollection);
